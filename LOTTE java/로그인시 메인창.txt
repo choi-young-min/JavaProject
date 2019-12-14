@@ -1,0 +1,1095 @@
+package lotte;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.CardLayout;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import java.awt.BorderLayout;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
+import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JTextPane;
+
+public class New_Member extends JFrame {
+	CardLayout card = new CardLayout(0,0);
+	LotteDAO dao = new LotteDAO();
+	private JPanel contentPane;
+	private JMenuBar menuBar;
+	private JMenu mnNewMenu;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmNewMenuItem_2;
+	private JMenu mnNewMenu_1;
+	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
+	private JMenuItem mntmNewMenuItem_5;
+	private JMenuItem mntmNewMenuItem_6;
+	private JMenuItem mntmNewMenuItem_7;
+	public JMenu mnNewMenu_2;
+	private JMenu mnNewMenu_3;
+	private JTable table;
+	DefaultTableModel model = new DefaultTableModel();
+	DefaultTableModel model2 = new DefaultTableModel();
+	private JPanel director;
+	private JPanel pitcher;
+	private JPanel batter;
+	private JPanel s_team;
+	private JPanel s_pitcher;
+	private JPanel s_batter;
+	private JPanel madein;
+	private JPanel pitcher_score;
+	private JPanel batter_score;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_4;
+	private JMenuItem mntmNewMenuItem_9;
+	private JMenuItem mntmNewMenuItem_10;
+	private JMenuItem mntmNewMenuItem_8;
+	private JPanel panel;
+	private JPanel main;
+	private JLabel lblNewLabel_2;
+	ImageIcon icon;
+	private JLabel lblNewLabel_5;
+	private JTextArea textArea;
+	private JLabel lblNewLabel_6;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton button;
+	private JButton button_1;
+	private JButton button_2;
+	private JButton button_3;
+	private JButton button_4;
+	private JButton button_5;
+	private JButton button_6;
+	private JButton button_7;
+	private JButton button_8;
+	private JButton button_9;
+	private JButton button_10;
+	private JButton button_11;
+	private JButton button_12;
+	private JButton button_13;
+	private JPanel panel_2;
+	private JTextArea textArea_1;
+	private JLabel lblNewLabel_7;
+	private JButton button_14;
+	private JButton button_15;
+	private JButton button_16;
+	private JButton button_17;
+	private JButton button_18;
+	private JButton button_19;
+	private JButton button_20;
+	private JButton button_21;
+	private JButton button_22;
+	private JButton button_23;
+	private JButton button_24;
+	private JButton button_25;
+	private JButton button_26;
+	private JButton button_27;
+	private JButton button_28;
+	private JButton button_29;
+	private JButton button_30;
+	private JButton button_31;
+	private JButton button_32;
+	private JLabel lblNewLabel_8;
+	private JLabel label_2;
+	private JLabel label_3;
+	private JPanel panel_1;
+	private JPanel panel_3;
+	private JLabel lblNewLabel;
+	private JTextArea textArea_2;
+	private JLabel lblNewLabel_9;
+	private JButton btnNewButton_3;
+	private JButton button_33;
+	private JButton button_34;
+	private JButton button_35;
+	private JButton button_36;
+	private JButton button_37;
+	private JLabel lblNewLabel_10;
+	private JLabel lblMvp;
+	private JLabel label;
+	private JScrollPane scrollPane;
+	private JLabel lblNewLabel_12;
+	private JLabel label_1;
+	private JLabel label_4;
+	private JLabel label_5;
+	private JLabel label_6;
+	private JTable table_1;
+	private JScrollPane scrollPane_1;
+	private JMenu mnNewMenu_4;
+	private JTextPane textPane;
+	private JTextPane textPane_1;
+	private JTextPane textPane_2;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					New_Member frame = new New_Member();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public New_Member() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\user\\eclipse-workspace\\Lotte\\Glogo.png"));
+		initGUI();
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addColumn("이름");
+		model.addColumn("등번호");
+		model.addColumn("포지션");
+		model.addColumn("타석");
+		model.addColumn("타율");
+		model.addColumn("안타");
+		model.addColumn("홈런");
+		model.addColumn("타점");
+		table.setModel(model);
+		table.getTableHeader().setBackground(
+				Color.black);
+		table.getTableHeader().setForeground(
+				Color.yellow);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setRowHeight(20);
+		
+		model2.addColumn("이름");
+		model2.addColumn("등번호");
+		model2.addColumn("포지션");
+		model2.addColumn("방어율");
+		model2.addColumn("삼진");
+		model2.addColumn("사사구");
+		table_1.setModel(model2);
+		table_1.getTableHeader().setBackground(
+				Color.black);
+		table_1.getTableHeader().setForeground(
+				Color.yellow);
+		table_1.getTableHeader().setReorderingAllowed(false);
+		table_1.setRowHeight(20);
+		
+	}
+	private void initGUI() {
+		setTitle("\uB86F\uB370\uC790\uC774\uC5B8\uCE20 \uAD00\uB9AC");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 658, 502);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnNewMenu_4 = new JMenu("\uD648");
+		mnNewMenu_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				card.show(getContentPane(), "main");
+			}
+		});
+		mnNewMenu_4.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\home.png"));
+		menuBar.add(mnNewMenu_4);
+		
+		mnNewMenu = new JMenu("\uC815\uBCF4");
+		mnNewMenu.setIconTextGap(24);
+		mnNewMenu.setAlignmentY(Component.TOP_ALIGNMENT);
+		mnNewMenu.setAlignmentX(Component.LEFT_ALIGNMENT);
+		menuBar.add(mnNewMenu);
+		
+		mntmNewMenuItem = new JMenuItem("\uCF54\uCE58\uC9C4");
+		mntmNewMenuItem.setIconTextGap(15);
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				card.show(getContentPane(), "director");
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png");
+				lblNewLabel.setIcon(icon);
+				textArea_2.setText("정보를 보실려면 \n버튼을 눌려주세요~!!");
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		mntmNewMenuItem_2 = new JMenuItem("\uD0C0\uC790");
+		mntmNewMenuItem_2.setIconTextGap(15);
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "batter");
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png");
+				lblNewLabel_5.setIcon(icon);
+				textArea.setText("정보를 보실려면 \n버튼을 눌려주세요~!!");
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		mntmNewMenuItem_9 = new JMenuItem("\uD22C\uC218");
+		mntmNewMenuItem_9.setIconTextGap(15);
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "pitcher");
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("정보를 보실려면 \n버튼을 눌려주세요~!!");
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_9);
+		
+		mnNewMenu_1 = new JMenu("\uAE30\uB85D");
+		mnNewMenu_1.setIconTextGap(24);
+		menuBar.add(mnNewMenu_1);
+		
+		mntmNewMenuItem_3 = new JMenuItem("\uD300 \uAE30\uB85D");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "s_team");
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		mntmNewMenuItem_4 = new JMenuItem("\uD0C0\uC790 \uAE30\uB85D");
+		mntmNewMenuItem_4.setFont(new Font("맑은 고딕", Font.PLAIN, 12));
+		mntmNewMenuItem_4.addActionListener(new ActionListener() { //선수 기록 출력!!
+			public void actionPerformed(ActionEvent arg0) {
+				card.show(getContentPane(), "s_batter");
+				LotteDTO_BAT[] arr = dao.getInfo();
+				Object []colNames = {"이름","등번호","포지션","타석","타율","안타","홈런","타점"};
+				String[][] data = new String[arr.length][8]; 
+				for(int i=0; i<data.length;i++) {
+					data[i][0] = arr[i].getName();
+					data[i][1] = arr[i].getNo()+"";
+					data[i][2] = arr[i].getPosition();
+					data[i][3] = arr[i].getBox()+"";
+					data[i][4] = arr[i].getBat()+"";
+					data[i][5] = arr[i].getHit()+"";
+					data[i][6] = arr[i].getHome()+"";
+					data[i][7] = arr[i].getRun()+"";							
+				}
+				model.setDataVector(data,colNames);
+				table.setBackground(new Color(255, 255, 204));
+				table.setModel(model);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_4);
+		
+		mntmNewMenuItem_10 = new JMenuItem("\uD22C\uC218\uAE30\uB85D");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "s_pitcher");
+				LotteDTO_PIT[] arr = dao.getInfo2();
+				String [] colNames = {"이름","등번호","포지션","방어율","삼진","사사구"};
+				String[][]data = new String[arr.length][6];
+				for(int i=0; i<data.length;i++) {
+					data[i][0] = arr[i].getName();
+					data[i][1] = arr[i].getNo()+"";
+					data[i][2] = arr[i].getPosition();
+					data[i][3] = arr[i].getEra()+"";
+					data[i][4] = arr[i].getK()+"";
+					data[i][5] = arr[i].getB()+"";						
+				}
+				model2.setDataVector(data,colNames);
+				table_1.setBackground(new Color(255, 255, 204));
+				table_1.setModel(model2);
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_10);
+		
+		mnNewMenu_2 = new JMenu("\uAD00\uB9AC\uC790");
+		mnNewMenu_2.setIconTextGap(24);
+		mnNewMenu_2.setEnabled(false);
+		menuBar.add(mnNewMenu_2);
+		
+		mntmNewMenuItem_5 = new JMenuItem("\uCD94\uAC00");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Insert_Player ip = new Insert_Player();
+				ip.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_5);
+		
+		mntmNewMenuItem_6 = new JMenuItem("\uC0AD\uC81C");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Delete_player dp = new Delete_player();
+				dp.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
+		mntmNewMenuItem_7 = new JMenuItem("\uC218\uC815");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Update_player up = new Update_player();
+				up.setSize(240, 185);
+				up.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_7);
+		
+		mnNewMenu_3 = new JMenu("Q&A");
+		mnNewMenu_3.setIconTextGap(24);
+		menuBar.add(mnNewMenu_3);
+		
+		mntmNewMenuItem_8 = new JMenuItem("Q&A");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "madein");
+			}
+		});
+		mnNewMenu_3.add(mntmNewMenuItem_8);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+		setContentPane(contentPane);
+		
+		contentPane.setLayout(card);
+		
+		main = new JPanel();
+		contentPane.add(main, "main");
+		main.setLayout(null);
+		
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\catalog.png"));
+		lblNewLabel_2.setBounds(22, 0, 608, 433);
+		main.add(lblNewLabel_2);
+		director = new JPanel();
+		contentPane.add(director, "director");
+		director.setLayout(null);
+		
+		panel_1 = new JPanel();
+		panel_1.setBounds(174, 0, 468, 433);
+		director.add(panel_1);
+		panel_1.setLayout(null);
+		
+		btnNewButton_3 = new JButton("\uACF5 \uD544 \uC131");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no70.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="감독 대행\n이름: 공필성\n등번호: 70\n생년월일: 1967.11.11\n경력: 제황초-진해남중-마산상고\n입단년도: 1990년도";
+				textArea_2.setText(arr);
+			}
+		});
+		btnNewButton_3.setBounds(290, 77, 97, 23);
+		panel_1.add(btnNewButton_3);
+		
+		button_33 = new JButton("\uCD5C \uAE30 \uBB38");
+		button_33.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no74.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="1군 배터리 코치\n이름: 최기문\n등번호: 74\n생년월일: 1973.06.10\n투타: 우투양타\n경력: 충암중-충암고-원광대\n입단년도: 1996년도";
+				textArea_2.setText(arr);
+			}
+		});
+		
+		lblNewLabel_12 = new JLabel("\uAC10\uB3C5 \uB300\uD589");
+		lblNewLabel_12.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		lblNewLabel_12.setForeground(Color.BLUE);
+		lblNewLabel_12.setBounds(148, 71, 97, 30);
+		panel_1.add(lblNewLabel_12);
+		button_33.setBounds(290, 249, 97, 23);
+		panel_1.add(button_33);
+		
+		button_34 = new JButton("\uC190 \uC778 \uD638");
+		button_34.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no86.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="1군 타격 코치\n이름: 손인호\n등번호: 86\n생년월일: 1975.04.03\n투타: 좌투좌타\n경력: 경남중-경남고-고려대\n입단년도: 1998년도";
+				textArea_2.setText(arr);
+			}
+		});
+		button_34.setBounds(290, 144, 97, 23);
+		panel_1.add(button_34);
+		
+		button_35 = new JButton("\uC784 \uACBD \uC644");
+		button_35.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no91.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="1군 투수 코치\n이름: 임경완\n등번호: 91\n생년월일: 1975.11.26\n투타: 우투우타\n경력:경남중-경남고-인하대\n입단년도: 1998년도";
+				textArea_2.setText(arr);
+			}
+		});
+		button_35.setBounds(290, 301, 97, 23);
+		panel_1.add(button_35);
+		
+		button_36 = new JButton("\uAE40 \uC2B9 \uAD00");
+		button_36.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no95.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="1군 타격 코치\n이름: 김승관\n등번호: 95\n생년월일: 1976.03.05\n투타: 우투우타\n경력: 경복중-대구상고\n입단년도: 1995년도";
+				textArea_2.setText(arr);
+			}
+		});
+		button_36.setBounds(290, 123, 97, 23);
+		panel_1.add(button_36);
+		
+		button_37 = new JButton("\uD64D \uBBFC \uAD6C");
+		button_37.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no98.jpg");
+				lblNewLabel.setIcon(icon);
+				String arr="1군 불펜 코치\n이름: 홍민구\n등번호: 98\n생년월일: 1975.04.12\n투타: 우투우타\n경력: 대신중-부산상고-한양대\n입단년도: 1998년도";
+				textArea_2.setText(arr);
+			}
+		});
+		button_37.setBounds(290, 202, 97, 23);
+		panel_1.add(button_37);
+		
+		label_1 = new JLabel("1\uAD70 \uD22C\uC218 \uCF54\uCE58");
+		label_1.setForeground(Color.BLUE);
+		label_1.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		label_1.setBounds(112, 282, 133, 56);
+		panel_1.add(label_1);
+		
+		label_4 = new JLabel("1\uAD70 \uBC30\uD130\uB9AC \uCF54\uCE58");
+		label_4.setForeground(Color.BLUE);
+		label_4.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		label_4.setBounds(112, 230, 185, 56);
+		panel_1.add(label_4);
+		
+		label_5 = new JLabel("1\uAD70 \uBD88\uD39C \uCF54\uCE58");
+		label_5.setForeground(Color.BLUE);
+		label_5.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		label_5.setBounds(112, 183, 185, 56);
+		panel_1.add(label_5);
+		
+		label_6 = new JLabel("1\uAD70 \uD0C0\uACA9 \uCF54\uCE58");
+		label_6.setForeground(Color.BLUE);
+		label_6.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		label_6.setBounds(112, 125, 185, 56);
+		panel_1.add(label_6);
+		
+		lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_9.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\baseline3.jpg"));
+		lblNewLabel_9.setBounds(0, 0, 468, 433);
+		panel_1.add(lblNewLabel_9);
+		
+		panel_3 = new JPanel();
+		panel_3.setBounds(0, 0, 176, 433);
+		director.add(panel_3);
+		panel_3.setLayout(null);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png"));
+		lblNewLabel.setBounds(0, 0, 176, 216);
+		panel_3.add(lblNewLabel);
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setText("\uC815\uBCF4\uB97C \uBCF4\uC2E4\uB824\uBA74\r\n\uBC84\uD2BC\uC744 \uB20C\uB824\uC8FC\uC138\uC694~!!\r\n");
+		textArea_2.setBounds(0, 218, 176, 215);
+		panel_3.add(textArea_2);
+		
+		pitcher = new JPanel();
+		contentPane.add(pitcher, "pitcher");
+		pitcher.setLayout(null);
+		
+		pitcher_score = new JPanel();
+		pitcher_score.setBounds(0, 0, 175, 433);
+		pitcher.add(pitcher_score);
+		pitcher_score.setLayout(null);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png"));
+		lblNewLabel_1.setBounds(0, 0, 181, 216);
+		pitcher_score.add(lblNewLabel_1);
+		
+		textArea_1 = new JTextArea();
+		textArea_1.setText("\uC815\uBCF4\uB97C \uBCF4\uC2E4\uB824\uBA74\r\n\uBC84\uD2BC\uC744 \uB20C\uB824\uC8FC\uC138\uC694~!!\r\n");
+		textArea_1.setBackground(Color.WHITE);
+		textArea_1.setBounds(0, 217, 181, 216);
+		pitcher_score.add(textArea_1);
+		
+		panel_2 = new JPanel();
+		panel_2.setBounds(181, 0, 461, 433);
+		pitcher.add(panel_2);
+		panel_2.setLayout(null);
+		
+		button_14 = new JButton("\uBC15 \uC9C4 \uD615");
+		button_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no40.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 박진형\n등번호: 40\n생년월일: 1994.06.10\n투타: 우투우타\n신장/체중: 181/77\n경력: 경포중-강릉고\n입단년도: 2013");
+			}
+		});
+		button_14.setBounds(12, 288, 97, 23);
+		panel_2.add(button_14);
+		
+		button_15 = new JButton("\uB2E4 \uC775 \uC190");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no50.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 다익손\n등번호: 50\n생년월일: 1994.07.02\n투타: 우투좌타\n신장/체중: 205/117\n경력: 업데이트 중입니다.\n입단년도: 2019");
+			}
+		});
+		button_15.setBounds(121, 96, 97, 23);
+		panel_2.add(button_15);
+		
+		button_16 = new JButton("\uB808 \uC77C \uB9AC");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no46.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 레일리\n등번호: 46\n생년월일: 1988.06.29\n투타: 좌투좌타\n신장/체중: 190/84\n경력: 미국 Uvalde(고)-미국 Texas A&M(대)\n입단년도: 2015");
+			}
+		});
+		button_16.setBounds(230, 96, 97, 23);
+		panel_2.add(button_16);
+		
+		button_17 = new JButton("\uBC15 \uADFC \uD64D");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no61.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 박근홍\n등번호: 61\n생년월일: 1985.08.22\n투타: 좌투좌타\n신장/체중: 180/90\n경력: 부산동성중-부산고\n입단년도: 2004");
+			}
+		});
+		button_17.setBounds(12, 255, 97, 23);
+		panel_2.add(button_17);
+		
+		button_18 = new JButton("\uACE0 \uD6A8 \uC900");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no23.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 고효준\n등번호: 23\n생년월일: 1983.02.08\n투타: 좌투좌타\n신장/체중: 179/74\n경력: 세광중-세광고\n입단년도: 2002");
+			}
+		});
+		button_18.setBounds(12, 222, 97, 23);
+		panel_2.add(button_18);
+		
+		button_19 = new JButton("\uAD6C \uC2B9 \uBBFC");
+		button_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no22.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 구승민\n등번호: 22\n생년월일: 1990.06.12\n투타: 우투우타\n신장/체중: 181/80\n경력: 청원중-청원고-홍익대\n입단년도: 2013");
+			}
+		});
+		button_19.setBounds(340, 255, 97, 23);
+		panel_2.add(button_19);
+		
+		button_20 = new JButton("\uAE40 \uAC74 \uAD6D");
+		button_20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no42.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 김건국\n등번호: 42\n생년월일: 1988.02.02\n투타: 우투우타\n신장/체중: 179/85\n경력: 청량중-덕수정보고\n입단년도: 2006");
+			}
+		});
+		button_20.setBounds(121, 288, 97, 23);
+		panel_2.add(button_20);
+		
+		button_21 = new JButton("\uAE40 \uC6D0 \uC911");
+		button_21.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no34.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 김원중\n등번호: 34\n생년월일: 1993.06.14\n투타: 우투좌타\n신장/체중: 192/91\n경력: 광주동성중-광주동성고\n입단년도: 2012");
+			}
+		});
+		button_21.setBounds(12, 96, 97, 23);
+		panel_2.add(button_21);
+		
+		button_22 = new JButton("\uBC15 \uC138 \uC6C5");
+		button_22.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no32.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 박세웅\n등번호: 32\n생년월일: 1995.11.30\n투타: 우투우타\n신장/체중: 181/78\n경력: 경운중-경북고\n입단년도: 2014");
+			}
+		});
+		button_22.setBounds(12, 135, 97, 23);
+		panel_2.add(button_22);
+		
+		button_23 = new JButton("\uBC15 \uC2DC \uC601");
+		button_23.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no37.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 박시영\n등번호: 37\n생년월일: 1989.03.10\n투타: 우투우타\n신장/체중: 180/88\n경력: 인천신흥중-제물포고\n입단년도: 2008");
+			}
+		});
+		button_23.setBounds(340, 222, 97, 23);
+		panel_2.add(button_23);
+		
+		button_24 = new JButton("\uC11C \uC900 \uC6D0");
+		button_24.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no39.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 서준원\n등번호: 39\n생년월일: 2000.11.05\n투타: 우투우타\n신장/체중: 187/95\n경력: 개성중-경남고\n입단년도: 2019");
+			}
+		});
+		button_24.setBounds(340, 96, 97, 23);
+		panel_2.add(button_24);
+		
+		button_25 = new JButton("\uC190 \uC2B9 \uB77D");
+		button_25.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no01.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 손승락\n등번호: 1\n생년월일: 1982.03.04\n투타: 우투우타\n신장/체중: 187/99\n경력: 경상중-대구고-영남대\n입단년도: 2005");
+			}
+		});
+		button_25.setBounds(12, 354, 97, 23);
+		panel_2.add(button_25);
+		
+		button_26 = new JButton("\uC190 \uC2B9 \uC900");
+		button_26.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no21.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 송승준\n등번호: 21\n생년월일: 1980.06.29\n투타: 우투우타\n신장/체중: 184/106\n경력: 경남중-경남고-미국 퍼시픽대\n입단년도: 1999");
+			}
+		});
+		button_26.setBounds(340, 135, 97, 23);
+		panel_2.add(button_26);
+		
+		button_27 = new JButton("\uC624 \uD604 \uD0DD");
+		button_27.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no15.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 오현택\n등번호: 15\n생년월일: 1985.07.17\n투타: 우투우타\n신장/체중: 180/73\n경력: 이수중-장충고-원광대\n입단년도: 2008");
+			}
+		});
+		button_27.setBounds(121, 222, 97, 23);
+		panel_2.add(button_27);
+		
+		button_28 = new JButton("\uC724 \uAE38 \uD604");
+		button_28.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no51.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 윤길현\n등번호: 51\n생년월일: 1983.09.23\n투타: 우투우타\n신장/체중: 183/85\n경력: 대구중-대구고\n입단년도: 2002");
+			}
+		});
+		button_28.setBounds(230, 222, 97, 23);
+		panel_2.add(button_28);
+		
+		button_29 = new JButton("\uC724 \uC131 \uBE48");
+		button_29.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no18.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 윤성빈\n등번호: 18\n생년월일: 1999.02.26\n투타: 우투우타\n신장/체중: 197/90\n경력: 경남중-부산고\n입단년도: 2017");
+			}
+		});
+		button_29.setBounds(121, 135, 97, 23);
+		panel_2.add(button_29);
+		
+		button_30 = new JButton("\uC7A5 \uC2DC \uD658");
+		button_30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no28.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 장시환\n등번호: 28\n생년월일: 1987.11.01\n투타: 우투우타\n신장/체중: 184/93\n경력: 태안중-북일고\n입단년도: 2007");
+			}
+		});
+		button_30.setBounds(230, 135, 97, 23);
+		panel_2.add(button_30);
+		
+		button_31 = new JButton("\uC815 \uC131 \uC885");
+		button_31.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no56.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 정성종\n등번호: 56\n생년월일: 1995.11.16\n투타: 우투좌타\n신장/체중: 181/88\n경력: 무등중-광주제일고-인하대\n입단년도: 2018");
+			}
+		});
+		button_31.setBounds(121, 255, 97, 23);
+		panel_2.add(button_31);
+		
+		button_32 = new JButton("\uC9C4 \uBA85 \uD638");
+		button_32.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no48.jpg");
+				lblNewLabel_1.setIcon(icon);
+				textArea_1.setText("이름: 진명호\n등번호: 48\n생년월일: 1989.03.20\n투타: 우투좌타\n신장/체중: 192/98\n경력: 전라중-효천고\n입단년도: 2009");
+			}
+		});
+		button_32.setBounds(230, 255, 97, 23);
+		panel_2.add(button_32);
+		
+		lblNewLabel_8 = new JLabel("\uC120 \uBC1C \uD22C \uC218");
+		lblNewLabel_8.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 21));
+		lblNewLabel_8.setForeground(Color.BLUE);
+		lblNewLabel_8.setBounds(12, 63, 112, 23);
+		panel_2.add(lblNewLabel_8);
+		
+		label_2 = new JLabel("\uAD6C \uC6D0 \uD22C \uC218");
+		label_2.setForeground(Color.BLUE);
+		label_2.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 21));
+		label_2.setBounds(12, 179, 112, 23);
+		panel_2.add(label_2);
+		
+		label_3 = new JLabel("\uB9C8 \uBB34 \uB9AC \uD22C \uC218");
+		label_3.setForeground(Color.BLUE);
+		label_3.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 21));
+		label_3.setBounds(12, 321, 142, 23);
+		panel_2.add(label_3);
+		
+		lblNewLabel_7 = new JLabel("");
+		lblNewLabel_7.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\baseline2.jpg"));
+		lblNewLabel_7.setBounds(0, 0, 461, 433);
+		panel_2.add(lblNewLabel_7);
+		
+		batter = new JPanel();
+		contentPane.add(batter, "batter");
+		batter.setLayout(null);
+		
+		batter_score = new JPanel();
+		batter_score.setBounds(0, 0, 178, 433);
+		batter.add(batter_score);
+		batter_score.setLayout(null);
+		
+		lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\G_logo.png"));
+		lblNewLabel_5.setBounds(0, 0, 177, 217);
+		batter_score.add(lblNewLabel_5);
+		
+		textArea = new JTextArea();
+		textArea.setText("\uC815\uBCF4\uB97C \uBCF4\uC2E4\uB824\uBA74\r\n\uBC84\uD2BC\uC744 \uB20C\uB824\uC8FC\uC138\uC694~!!\r\n");
+		textArea.setBounds(0, 215, 177, 217);
+		batter_score.add(textArea);
+		
+		panel = new JPanel();
+		panel.setBounds(179, 0, 463, 433);
+		batter.add(panel);
+		panel.setLayout(null);
+		
+		btnNewButton_2 = new JButton("\uC70C  \uC2A8");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no69.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 윌슨\n등번호: 69\n생년월일: 1990.07.29\n투타: 우투우타\n신장/체중: 180/92\n경력: 업데이트 중입니다.\n입단년도: 2019";
+				textArea.setText(arr);
+			}
+		});
+		btnNewButton_2.setBounds(42, 256, 97, 23);
+		panel.add(btnNewButton_2);
+		
+		btnNewButton_1 = new JButton("\uC2E0 \uBCF8 \uAE30");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no07.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 신본기\n등번호: 7\n생년월일: 1989.03.21\n투타: 우투우타\n신장/체중: 179/88\n경력: 경남중-경남고-동아대\n입단년도: 2012";
+				textArea.setText(arr);
+			}
+		});
+		btnNewButton_1.setBounds(107, 159, 97, 23);
+		panel.add(btnNewButton_1);
+		
+		btnNewButton = new JButton("\uD55C \uB3D9 \uD76C");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no25.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 한동희\n등번호: 25\n생년월일: 1999.06.01\n투타: 우투우타\n신장/체중: 181/99\n경력: 경남중-경남고\n입단년도: 2018";
+				textArea.setText(arr);
+			}
+		});
+		btnNewButton.setBounds(42, 233, 97, 23);
+		panel.add(btnNewButton);
+		
+		button = new JButton("\uC804 \uC900 \uC6B0");
+		button.addActionListener(new ActionListener() { //전준우
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no08.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 전준우\n"
+						+ "등넘버: 09\n"
+						+ "생년월일: 1986.02.25\n"
+						+ "투타: 우투우타\n"
+						+ "신장/체중: 184/97 \n"
+						+ "경력: 경주중-경주고-건국대\n"
+						+ "입단년도: 2008";
+				textArea.setText(arr);
+			}
+		});
+		button.setBounds(12, 111, 97, 23);
+		panel.add(button);
+		
+		button_1 = new JButton("\uB098 \uC885 \uB355");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no27.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 나종덕\n등번호: 27\n생년월일: 1998.03.16\n투타: 우투우타\n신장/체중: 185/99\n경력: 창원신월중-용마고\n입단년도: 2017";
+				textArea.setText(arr);
+			}
+		});
+		button_1.setBounds(176, 360, 97, 23);
+		panel.add(button_1);
+		
+		button_2 = new JButton("\uAE40 \uC900 \uD0DC");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no44.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 김준태\n등번호: 44\n생년월일: 1994.07.31\n투타: 우투좌타\n신장/체중: 175/91\n경력: 개성중-경남고\n입단년도: 2012";
+				textArea.setText(arr);
+			}
+		});
+		button_2.setBounds(176, 381, 97, 23);
+		panel.add(button_2);
+		
+		button_3 = new JButton("\uC548 \uC911 \uC5F4");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no02.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 안중열\n등번호: 2\n생년월일: 1995.09.01\n투타: 우투우타\n신장/체중: 175/87\n경력: 개성중-부산고\n입단년도: 2014";
+				textArea.setText(arr);
+			}
+		});
+		button_3.setBounds(176, 339, 97, 23);
+		panel.add(button_3);
+		
+		button_4 = new JButton("\uCC44 \uD0DC \uC778");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no17.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 채태인\n등번호: 17\n생년월일: 1982.10.11\n투타: 좌투좌타\n신장/체중: 187/94\n경력: 대동중-부산상고\n입단년도: 2003";
+				textArea.setText(arr);
+			}
+		});
+		button_4.setBounds(294, 233, 97, 23);
+		panel.add(button_4);
+		
+		button_5 = new JButton("\uC774 \uB300 \uD638");
+		button_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no10.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 이대호\n등번호: 10\n생년월일: 1982.06.21\n투타: 우투우타\n신장/체중: 194/130\n경력: 대동중-경남고\n입단년도: 2001";
+				textArea.setText(arr);
+			}
+		});
+		button_5.setBounds(318, 339, 97, 23);
+		panel.add(button_5);
+		
+		button_6 = new JButton("\uBB38 \uADDC \uD604");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no06.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 문규현\n등번호: 6\n생년월일: 1983.07.05\n투타: 우투우타\n신장/체중: 185/92\n경력: 군산남중-군산상고\n입단년도: 2002";
+				textArea.setText(arr);
+			}
+		});
+		button_6.setBounds(107, 183, 97, 23);
+		panel.add(button_6);
+		
+		button_7 = new JButton("\uAC15 \uB85C \uD55C");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no54.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 강로한\n등번호: 54\n생년월일: 1992.05.13\n투타: 우투좌타\n신장/체중: 181/78\n경력: 경남중-부경고-경남대\n입단년도: 2015";
+				textArea.setText(arr);
+			}
+		});
+		button_7.setBounds(246, 159, 97, 23);
+		panel.add(button_7);
+		
+		button_8 = new JButton("\uC624 \uC724 \uC11D");
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no04.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 오윤석\n등번호: 4\n생년월일: 1992.02.24\n투타: 우투우타\n신장/체중: 180/87\n경력: 경기고-연세대\n입단년도: 2014";
+				textArea.setText(arr);
+			}
+		});
+		button_8.setBounds(246, 183, 97, 23);
+		panel.add(button_8);
+		
+		button_9 = new JButton("\uC815  \uD6C8");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no09.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 정훈\n등번호: 9\n생년월일: 1987.07.18\n투타: 우투우타\n신장/체중: 180/85\n경력: 마산동중-용마고\n입단년도: 2010";
+				textArea.setText(arr);
+			}
+		});
+		button_9.setBounds(176, 53, 97, 23);
+		panel.add(button_9);
+		
+		button_10 = new JButton("\uB098 \uACBD \uBBFC");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no00.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 나경민\n등번호: 0\n생년월일: 1991.12.12\n투타: 좌투좌타\n신장/체중: 177/80\n경력: 잠신중-덕수고\n입단년도: 2016";
+				textArea.setText(arr);
+			}
+		});
+		button_10.setBounds(176, 10, 97, 23);
+		panel.add(button_10);
+		
+		button_11 = new JButton("\uBBFC \uBCD1 \uD5CC");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no03.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 민병헌\n"
+						+ "등넘버: 3\n"
+						+ "생년월일: 1987.03.10\n"
+						+ "투타: 우투우타\n"
+						+ "신장/체중: 178/87 \n"
+						+ "경력: 잠신중-덕수정보고	\n"
+						+ "입단년도: 2006";
+				textArea.setText(arr);
+			}
+		});
+		button_11.setBounds(176, 32, 97, 23);
+		panel.add(button_11);
+		
+		button_12 = new JButton("\uAE40 \uBB38 \uD638");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no24.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 김문호\n"
+						+ "등넘버: 24\n"
+						+ "생년월일: 1987.06.22\n"
+						+ "투타: 좌투좌타\n"
+						+ "신장/체중: 185/102 \n"
+						+ "경력: 덕수중-덕수정보고	\n"
+						+ "입단년도: 2006";
+				textArea.setText(arr);
+			}
+		});
+		button_12.setBounds(12, 90, 97, 23);
+		panel.add(button_12);
+		
+		button_13 = new JButton("\uC190 \uC544 \uC12D");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				icon = new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\player_big_img\\no31.jpg");
+				lblNewLabel_5.setIcon(icon);
+				String arr="이름: 손아섭\n등번호: 31\n생년월일: 1988.03.18\n투타: 우투좌타\n신장/체중: 174/84\n경력: 개성중-부산고\n입단년도: 2007";
+				textArea.setText(arr);
+			}
+		});
+		button_13.setBounds(354, 111, 97, 23);
+		panel.add(button_13);
+		
+		lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\baseline.jpg"));
+		lblNewLabel_6.setBounds(10, 0, 453, 423);
+		panel.add(lblNewLabel_6);
+		
+		s_team = new JPanel();
+		contentPane.add(s_team, "s_team");
+		s_team.setLayout(null);
+		String arr = "\n\n\n손아섭(11,12,13,14,17), 이대호(6,7,10,11,17), 조성환(8,10,13)\n"
+				+ "강민호(8,11,12,13), 홍성흔(8,9,10,11), 가르시아(8), 박기혁(8)\n"
+				+ "호세(99), 박정태(91,92,96,98,99), 손민한(5), 김응국(92,96)\n"
+				+ "전준호(93,95),박계원(92), 김용철(84,88), 김용희(82,83,85)\n"
+				+ "홍문종(84), 최동원(84), 김성관(84)\n";
+		
+		lblNewLabel_10 = new JLabel("\uC5ED\uB300 \uACE8\uB4E0\uAE00\uB7EC\uBE0C");
+		lblNewLabel_10.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 22));
+		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblNewLabel_10.setBounds(12, 248, 336, 62);
+		s_team.add(lblNewLabel_10);
+		
+		lblMvp = new JLabel("\uC5ED\uB300 MVP");
+		lblMvp.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblMvp.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 22));
+		lblMvp.setBounds(12, 120, 251, 62);
+		s_team.add(lblMvp);
+		String arr2 = "\n\n\n이대호(10),손민한(05),최동원(84)";
+		
+		label = new JLabel("\r\n\uC5ED\uB300 \uC6B0\uC2B9");
+		label.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		label.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 22));
+		label.setBounds(12, 12, 251, 62);
+		s_team.add(label);
+		
+		textPane = new JTextPane();
+		textPane.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		textPane.setText("\uC190\uC544\uC12D(11,12,13,14,17), \uC774\uB300\uD638(06,07,10,11,17), \uC870\uC131\uD658(08,10,13)\r\n\uAC15\uBBFC\uD638(08,11,12,13), \uD64D\uC131\uD754(08,09,10,11), \uAC00\uB974\uC2DC\uC544(08), \uBC15\uAE30\uD601(08)\r\n\uD638\uC138(99), \uBC15\uC815\uD0DC(91,92,96,98,99), \uC190\uBBFC\uD55C(05), \uAE40\uC751\uAD6D(92,96)\r\n\uC804\uC900\uD638(93,95),\uBC15\uACC4\uC6D0(92), \uAE40\uC6A9\uCCA0(84,88), \uAE40\uC6A9\uD76C(82,83,85)\r\n\uD64D\uBB38\uC885(84), \uCD5C\uB3D9\uC6D0(84), \uAE40\uC131\uAD00(84)");
+		textPane.setBounds(22, 320, 608, 103);
+		s_team.add(textPane);
+		
+		textPane_1 = new JTextPane();
+		textPane_1.setFont(new Font("굴림", Font.PLAIN, 24));
+		textPane_1.setText("\uC774\uB300\uD638(10),\uC190\uBBFC\uD55C(05),\uCD5C\uB3D9\uC6D0(84)");
+		textPane_1.setBounds(22, 192, 608, 46);
+		s_team.add(textPane_1);
+		
+		textPane_2 = new JTextPane();
+		textPane_2.setText("1984\uB144, 1992\uB144");
+		textPane_2.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		textPane_2.setBounds(22, 81, 608, 29);
+		s_team.add(textPane_2);
+		
+		s_pitcher = new JPanel();
+		contentPane.add(s_pitcher, "s_pitcher");
+		s_pitcher.setLayout(null);
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 0, 642, 433);
+		s_pitcher.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		
+		s_batter = new JPanel();
+		contentPane.add(s_batter, "s_batter");
+		s_batter.setLayout(null);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 642, 433);
+		s_batter.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		madein = new JPanel();
+		contentPane.add(madein, "madein");
+		
+		lblNewLabel_4 = new JLabel("\uB9CC\uB4E0\uC774");
+		madein.add(lblNewLabel_4);
+	}
+}

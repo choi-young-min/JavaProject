@@ -1,0 +1,346 @@
+package lotte;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.CardLayout;
+import javax.swing.JButton;
+import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Window.Type;
+import javax.swing.ImageIcon;
+
+public class Update_player extends JFrame {
+	LotteDAO dao = new LotteDAO();
+	LotteDTO_PIT lp = new LotteDTO_PIT();
+	LotteDTO_BAT lb = new LotteDTO_BAT();
+	private JPanel contentPane;
+	private JPanel main;
+	private JPanel pitcher;
+	private JPanel batter;
+	private JButton button_batter;
+	private JButton button_pitcher;
+	CardLayout card = new CardLayout(0, 0);
+	private JLabel label;
+	private JTextField pno;
+	private JLabel label_4;
+	private JTextField pera;
+	private JLabel label_5;
+	private JTextField pk;
+	private JLabel label_6;
+	private JTextField pb;
+	private JLabel lblNewLabel_1;
+	private JButton btnNewButton;
+	private JLabel label_2;
+	private JLabel label_7;
+	private JTextField bno;
+	private JLabel label_9;
+	private JLabel label_10;
+	private JLabel label_11;
+	private JTextField bbox;
+	private JTextField bbat;
+	private JTextField bhit;
+	private JLabel label_12;
+	private JTextField bhome;
+	private JLabel label_13;
+	private JTextField brun;
+	private JButton button;
+	private JButton button_1;
+	private JButton button_2;
+	private int res = 0;
+	private JLabel lblNewLabel;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Update_player frame = new Update_player();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Update_player() {
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		initGUI();
+	}
+	private void initGUI() {
+		setBackground(Color.WHITE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\user\\eclipse-workspace\\Lotte\\Glogo.png"));
+		setTitle("\uC120\uC218 \uC218\uC815");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 240, 185);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(card);
+		
+		main = new JPanel();
+		contentPane.add(main, "main");
+		main.setLayout(null);
+		
+		button_batter = new JButton("\uD0C0\uC790 \uC218\uC815");
+		button_batter.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		button_batter.setBackground(Color.PINK);
+		button_batter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSize(240,351);
+				card.show(getContentPane(), "batter");
+			}
+		});
+		button_batter.setBounds(0, 72, 107, 55);
+		main.add(button_batter);
+		
+		button_pitcher = new JButton("\uD22C\uC218 \uC218\uC815");
+		button_pitcher.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		button_pitcher.setBackground(Color.PINK);
+		button_pitcher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSize(240,286);
+				card.show(getContentPane(), "pitcher");
+			}
+		});
+		button_pitcher.setBounds(109, 72, 105, 55);
+		main.add(button_pitcher);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblNewLabel.setBounds(0, 0, 214, 62);
+		main.add(lblNewLabel);
+		
+		pitcher = new JPanel();
+		contentPane.add(pitcher, "pitcher");
+		pitcher.setLayout(null);
+		
+		label = new JLabel("\uB4F1\uBC88\uD638 : ");
+		label.setBounds(12, 64, 57, 15);
+		pitcher.add(label);
+		
+		pno = new JTextField();
+		pno.setColumns(10);
+		pno.setBounds(81, 61, 116, 21);
+		pitcher.add(pno);
+		
+		label_4 = new JLabel("\uBC29\uC5B4\uC728 : ");
+		label_4.setBounds(12, 92, 57, 15);
+		pitcher.add(label_4);
+		
+		pera = new JTextField();
+		pera.setColumns(10);
+		pera.setBounds(81, 89, 116, 21);
+		pitcher.add(pera);
+		
+		label_5 = new JLabel("\uC0BC\uC9C4 : ");
+		label_5.setBounds(12, 120, 57, 15);
+		pitcher.add(label_5);
+		
+		pk = new JTextField();
+		pk.setColumns(10);
+		pk.setBounds(81, 117, 116, 21);
+		pitcher.add(pk);
+		
+		label_6 = new JLabel("\uC0AC\uAD6C : ");
+		label_6.setBounds(12, 148, 57, 15);
+		pitcher.add(label_6);
+		
+		pb = new JTextField();
+		pb.setColumns(10);
+		pb.setBounds(81, 145, 116, 21);
+		pitcher.add(pb);
+		
+		lblNewLabel_1 = new JLabel("\uD22C\uC218 \uC218\uC815");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 25));
+		lblNewLabel_1.setBounds(12, 10, 200, 41);
+		pitcher.add(lblNewLabel_1);
+		
+		btnNewButton = new JButton("\uC774\uC804");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSize(240,185);
+				card.show(getContentPane(), "main");
+			}
+		});
+		btnNewButton.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		btnNewButton.setBounds(12, 173, 94, 41);
+		pitcher.add(btnNewButton);
+		
+		button_1 = new JButton("\uB4F1\uB85D");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { //투수 수정
+				String no = pno.getText();
+				String era = pera.getText();
+				String k = pk.getText();
+				String b = pk.getText();
+				if(no.equals("")||era.equals("")||k.equals("")||b.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "정보를 입력해주세요!!");
+					return;
+				}
+				lp.setNo(Integer.parseInt(no)); //투수 등번호
+				lp.setEra(Double.parseDouble(era)); //투수 era
+				lp.setK(Integer.parseInt(k)); //투수 삼진
+				lp.setB(Integer.parseInt(b)); // 투수 사구
+				res = dao.updatePitcher(lp); //update
+				System.out.println(res);
+				if(res > 0) {
+					JOptionPane.showMessageDialog(getContentPane(), "수정 성공!!");
+					initPitcher();
+				}
+				else {
+					JOptionPane.showMessageDialog(getContentPane(), "수정 실패!!, 없는 등번호 입니다ㅜㅜ");
+					initPitcher();
+				}
+			}
+		});
+		button_1.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		button_1.setBounds(106, 173, 94, 41);
+		pitcher.add(button_1);
+		
+		batter = new JPanel();
+		contentPane.add(batter, "batter");
+		batter.setLayout(null);
+		
+		label_2 = new JLabel("\uD0C0\uC790 \uC218\uC815");
+		label_2.setHorizontalAlignment(SwingConstants.CENTER);
+		label_2.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 25));
+		label_2.setBounds(12, 10, 185, 41);
+		batter.add(label_2);
+		
+		label_7 = new JLabel("\uB4F1\uBC88\uD638 : ");
+		label_7.setBounds(12, 61, 57, 15);
+		batter.add(label_7);
+		
+		bno = new JTextField();
+		bno.setColumns(10);
+		bno.setBounds(81, 61, 116, 21);
+		batter.add(bno);
+		
+		label_9 = new JLabel("\uC548\uD0C0 : ");
+		label_9.setBounds(12, 145, 57, 15);
+		batter.add(label_9);
+		
+		label_10 = new JLabel("\uD0C0\uC728 : ");
+		label_10.setBounds(12, 117, 57, 15);
+		batter.add(label_10);
+		
+		label_11 = new JLabel("\uD0C0\uC11D : ");
+		label_11.setBounds(12, 89, 57, 15);
+		batter.add(label_11);
+		
+		bbox = new JTextField();
+		bbox.setColumns(10);
+		bbox.setBounds(81, 86, 116, 21);
+		batter.add(bbox);
+		
+		bbat = new JTextField();
+		bbat.setColumns(10);
+		bbat.setBounds(81, 114, 116, 21);
+		batter.add(bbat);
+		
+		bhit = new JTextField();
+		bhit.setColumns(10);
+		bhit.setBounds(81, 142, 116, 21);
+		batter.add(bhit);
+		
+		label_12 = new JLabel("\uD648\uB7F0 : ");
+		label_12.setBounds(12, 173, 57, 15);
+		batter.add(label_12);
+		
+		bhome = new JTextField();
+		bhome.setColumns(10);
+		bhome.setBounds(81, 170, 116, 21);
+		batter.add(bhome);
+		
+		label_13 = new JLabel("\uD0C0\uC810 : ");
+		label_13.setBounds(12, 201, 57, 15);
+		batter.add(label_13);
+		
+		brun = new JTextField();
+		brun.setColumns(10);
+		brun.setBounds(81, 198, 116, 21);
+		batter.add(brun);
+		
+		button = new JButton("\uC774\uC804");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setSize(240,180);
+				card.show(getContentPane(), "main");
+			}
+		});
+		button.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		button.setBounds(12, 240, 93, 41);
+		batter.add(button);
+		
+		button_2 = new JButton("\uB4F1\uB85D");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String no = bno.getText();
+				String box = bbox.getText();
+				String bat = bbat.getText();
+				String hit = bhit.getText();
+				String home = bhome.getText();
+				String run = brun.getText();
+				if(no.equals("")||box.equals("")||bat.equals("")||hit.equals("")||home.equals("")||run.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "입력값을 넣어주세요!!");
+					return;
+				}
+				lb.setNo(Integer.parseInt(no));
+				lb.setBox(Integer.parseInt(box));
+				lb.setBat(Double.parseDouble(bat));
+				lb.setHit(Integer.parseInt(hit));
+				lb.setHome(Integer.parseInt(home));
+				lb.setRun(Integer.parseInt(run));
+				res = dao.updateBatter(lb);
+				if(res >0) {
+					JOptionPane.showMessageDialog(getContentPane(), "타자 수정 성공!");
+					initBatter();
+				}else {
+					JOptionPane.showMessageDialog(getContentPane(), "수정 실패!!, 없는 등번호 입니다ㅜㅜ");
+					initBatter();
+				}
+			}
+		});
+		button_2.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 20));
+		button_2.setBounds(104, 240, 93, 41);
+		batter.add(button_2);
+	}
+	public void initBatter() {
+		bbat.setText("");
+		bbox.setText("");
+		bhit.setText("");
+		bhome.setText("");
+		bno.setText("");
+		brun.setText("");
+	}
+	public void initPitcher() {
+		pera.setText("");
+		pk.setText("");
+		pno.setText("");
+		pb.setText("");
+	}
+}

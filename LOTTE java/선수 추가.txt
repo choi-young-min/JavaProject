@@ -1,0 +1,309 @@
+package lotte;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Toolkit;
+
+public class Insert_Player extends JFrame {
+	LotteDAO dao = new LotteDAO();
+	LotteDTO_BAT lb = new LotteDTO_BAT();
+	LotteDTO_PIT lp = new LotteDTO_PIT();
+	private JPanel contentPane;
+	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbtnNewRadioButton_1;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_7;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JLabel lblNewLabel_8;
+	private JLabel lblNewLabel_9;
+	private JLabel lblNewLabel_10;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	ButtonGroup bg = new ButtonGroup();
+	private JButton btnNewButton;
+	private JLabel lblNewLabel_11;
+	private JLabel lblNewLabel_12;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Insert_Player frame = new Insert_Player();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Insert_Player() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\user\\eclipse-workspace\\Lotte\\Glogo.png"));
+		initGUI();
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void initGUI() {
+		setTitle("\uC120\uC218 \uB4F1\uB85D");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 461, 288);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		rdbtnNewRadioButton = new JRadioButton("\uD22C\uC218"); //타자 radioButton
+		rdbtnNewRadioButton.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField_3.setEnabled(false);
+				textField_4.setEnabled(false);
+				textField_5.setEnabled(false);
+				textField_6.setEnabled(false);
+				textField_7.setEnabled(false);
+				textField_8.setEnabled(true);
+				textField_9.setEnabled(true);
+				textField_10.setEnabled(true);
+			}
+		});
+		rdbtnNewRadioButton.setBounds(312, 37, 67, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		
+		rdbtnNewRadioButton_1 = new JRadioButton("\uD0C0\uC790"); //투수 radioButton
+		rdbtnNewRadioButton_1.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		rdbtnNewRadioButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField_3.setEnabled(true);
+				textField_4.setEnabled(true);
+				textField_5.setEnabled(true);
+				textField_6.setEnabled(true);
+				textField_7.setEnabled(true);
+				textField_8.setEnabled(false);
+				textField_9.setEnabled(false);
+				textField_10.setEnabled(false);
+			}
+		});
+		rdbtnNewRadioButton_1.setBounds(184, 37, 67, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		bg.add(rdbtnNewRadioButton);
+		bg.add(rdbtnNewRadioButton_1);
+		
+		lblNewLabel = new JLabel("\uC774\uB984");
+		lblNewLabel.setBounds(12, 110, 57, 15);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("\uB4F1\uBC88\uD638");
+		lblNewLabel_1.setBounds(12, 138, 57, 15);
+		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("\uD3EC\uC9C0\uC158");
+		lblNewLabel_2.setBounds(12, 168, 57, 15);
+		contentPane.add(lblNewLabel_2);
+		
+		textField = new JTextField();
+		textField.setBounds(62, 107, 74, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(62, 135, 74, 21);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(62, 165, 74, 21);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		lblNewLabel_3 = new JLabel("\uD0C0\uC11D");
+		lblNewLabel_3.setBounds(157, 79, 57, 15);
+		contentPane.add(lblNewLabel_3);
+		
+		lblNewLabel_4 = new JLabel("\uD0C0\uC728");
+		lblNewLabel_4.setBounds(157, 107, 57, 15);
+		contentPane.add(lblNewLabel_4);
+		
+		lblNewLabel_5 = new JLabel("\uC548\uD0C0");
+		lblNewLabel_5.setBounds(157, 140, 57, 15);
+		contentPane.add(lblNewLabel_5);
+		
+		lblNewLabel_6 = new JLabel("\uD648\uB7F0");
+		lblNewLabel_6.setBounds(157, 171, 57, 15);
+		contentPane.add(lblNewLabel_6);
+		
+		lblNewLabel_7 = new JLabel("\uD0C0\uC810");
+		lblNewLabel_7.setBounds(157, 199, 57, 15);
+		contentPane.add(lblNewLabel_7);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(199, 76, 62, 21);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(199, 107, 62, 21);
+		contentPane.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(199, 137, 62, 21);
+		contentPane.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(199, 168, 62, 21);
+		contentPane.add(textField_6);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(199, 196, 62, 21);
+		contentPane.add(textField_7);
+		
+		lblNewLabel_8 = new JLabel("\uBC29\uC5B4\uC728");
+		lblNewLabel_8.setBounds(297, 78, 57, 15);
+		contentPane.add(lblNewLabel_8);
+		
+		lblNewLabel_9 = new JLabel("\uC0BC\uC9C4");
+		lblNewLabel_9.setBounds(297, 109, 57, 15);
+		contentPane.add(lblNewLabel_9);
+		
+		lblNewLabel_10 = new JLabel("\uC0AC\uC0AC\uAD6C");
+		lblNewLabel_10.setBounds(297, 139, 57, 15);
+		contentPane.add(lblNewLabel_10);
+		
+		textField_8 = new JTextField();
+		textField_8.setBounds(344, 75, 57, 21);
+		contentPane.add(textField_8);
+		textField_8.setColumns(10);
+		
+		textField_9 = new JTextField();
+		textField_9.setBounds(344, 106, 57, 21);
+		contentPane.add(textField_9);
+		textField_9.setColumns(10);
+		
+		textField_10 = new JTextField();
+		textField_10.setBounds(344, 136, 57, 21);
+		contentPane.add(textField_10);
+		textField_10.setColumns(10);
+		
+		
+		btnNewButton = new JButton("\uB4F1     \uB85D"); //등록 버튼
+		btnNewButton.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 15));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = textField.getText();
+				String no = textField_1.getText();
+				String position = textField_2.getText();
+				if(name.equals("")||no.equals("")||position.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "정보를 입력하여 주세요");
+				}
+				if(rdbtnNewRadioButton_1.isSelected()==true) { //타자 등록
+					lb.setName(textField.getText());
+					lb.setNo(Integer.parseInt(textField_1.getText()));
+					lb.setPosition(textField_2.getText());
+					lb.setBox(Integer.parseInt(textField_3.getText()));
+					lb.setBat(Double.parseDouble(textField_4.getText()));
+					lb.setHit(Integer.parseInt(textField_5.getText()));
+					lb.setHome(Integer.parseInt(textField_6.getText()));
+					lb.setRun(Integer.parseInt(textField_7.getText()));
+					int res =dao.insertBatter(lb);
+					if(res >0) {
+						JOptionPane.showMessageDialog(getContentPane(), "타자 선수 등록성공!!");
+						initTextField();
+					}else
+					{
+						JOptionPane.showMessageDialog(getContentPane(),"선수 등록 실패!!");
+						initTextField();
+					}
+				}
+				else if(rdbtnNewRadioButton.isSelected()==true){ //투수 등록
+					lp.setName(textField.getText());
+					lp.setNo(Integer.parseInt(textField_1.getText()));
+					lp.setPosition(textField_2.getText());
+					lp.setEra(Double.parseDouble(textField_8.getText()));
+					lp.setK(Integer.parseInt(textField_9.getText()));
+					lp.setB(Integer.parseInt(textField_10.getText()));
+					int res = dao.insertPitcher(lp);
+					if(res >0) {
+						JOptionPane.showMessageDialog(getContentPane(), "선수 등록성공!!");
+						initTextField();
+					}else
+					{
+						JOptionPane.showMessageDialog(getContentPane(),"선수 등록 실패!!");
+						initTextField();
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(getContentPane(), "아무것도 선택 되지 않았습니다!");
+					initTextField();
+				}
+			}
+		});
+		btnNewButton.setBounds(297, 194, 104, 23);
+		contentPane.add(btnNewButton);
+		
+		lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblNewLabel_11.setBounds(12, 11, 137, 60);
+		contentPane.add(lblNewLabel_11);
+		
+		lblNewLabel_12 = new JLabel("\uC120\uC218 \uAE30\uBCF8 \uC815\uBCF4");
+		lblNewLabel_12.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 18));
+		lblNewLabel_12.setBounds(12, 79, 133, 21);
+		contentPane.add(lblNewLabel_12);
+	}
+	public void initTextField() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
+		textField_3.setText("");
+		textField_4.setText("");
+		textField_5.setText("");
+		textField_6.setText("");
+		textField_7.setText("");
+		textField_8.setText("");
+		textField_9.setText("");
+		textField_10.setText("");
+	}
+}

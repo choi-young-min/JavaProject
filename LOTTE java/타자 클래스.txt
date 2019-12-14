@@ -1,0 +1,51 @@
+package lotte;
+
+public class LotteDTO_BAT extends LotteDTO_p{ //타자 
+	private int box; //타석
+	private double bat; //타율
+	private int hit; //안타
+	private int home; //홈런
+	private int run; //타점
+	
+	public LotteDTO_BAT() {}
+	public LotteDTO_BAT(String name,int no,String position,int box,double bat
+		,int hit,int home,int run) {
+		super(name,no,position);
+		this.box = box;
+		this.bat = bat;
+		this.hit = hit;
+		this.home = home;
+		this.run = run;
+	}
+	
+	public int getBox() {
+		return box;
+	}
+	public void setBox(int box) {
+		this.box = box;
+	}
+	public double getBat() {
+		return bat;
+	}
+	public void setBat(double bat) {
+		this.bat = bat;
+	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	public int getHome() {
+		return home;
+	}
+	public void setHome(int home) {
+		this.home = home;
+	}
+	public int getRun() {
+		return run;
+	}
+	public void setRun(int run) {
+		this.run = run;
+	}
+}

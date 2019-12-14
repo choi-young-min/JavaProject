@@ -1,0 +1,119 @@
+package lotte;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+
+public class Delete_user extends JFrame {
+	LotteDAO dao = new LotteDAO();
+	private JPanel contentPane;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JTextField textField;
+	private JButton btnNewButton;
+	private JPasswordField passwordField;
+	private JLabel lblNewLabel_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Delete_user frame = new Delete_user();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Delete_user() {
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		initGUI();
+	}
+	private void initGUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\user\\eclipse-workspace\\Lotte\\Glogo.png"));
+		setTitle("\uD68C\uC6D0 \uC0AD\uC81C");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 280, 207);
+		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblNewLabel = new JLabel("\uC544\uC774\uB514");
+		lblNewLabel.setBounds(46, 73, 57, 15);
+		contentPane.add(lblNewLabel);
+		
+		lblNewLabel_1 = new JLabel("\uD328\uC2A4\uC6CC\uB4DC");
+		lblNewLabel_1.setBounds(46, 98, 57, 15);
+		contentPane.add(lblNewLabel_1);
+		
+		textField = new JTextField();
+		textField.setBounds(115, 70, 116, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		btnNewButton = new JButton("\uC0AD \uC81C");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = textField.getText();
+				String pass = new String(passwordField.getPassword());
+				if(id.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "아이디와 패스워드를 입력하세요!");
+					return;
+				}
+				int a = JOptionPane.showConfirmDialog(getContentPane(), "정말 삭제 하시겠습니까??");
+				if(a == JOptionPane.YES_OPTION) {
+					int res = dao.deleteUser(id,pass);
+					if(res > 0) {
+						JOptionPane.showMessageDialog(getContentPane(), "정보를 삭제 하셨습니다.\n 이용해주셔서 감사합니다~^^");
+						textField.setText("");
+						passwordField.setText("");
+					}
+					else {
+						JOptionPane.showMessageDialog(getContentPane(), "아이디와 비밀번호를 확인하세요!");
+						textField.setText("");
+						passwordField.setText("");
+					}
+				}
+			}
+		});
+		btnNewButton.setBounds(134, 126, 97, 23);
+		contentPane.add(btnNewButton);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(115, 95, 116, 21);
+		contentPane.add(passwordField);
+		
+		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblNewLabel_2.setBounds(59, 0, 146, 75);
+		contentPane.add(lblNewLabel_2);
+	}
+}

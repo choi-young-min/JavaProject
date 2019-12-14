@@ -1,0 +1,33 @@
+package lotte;
+
+public class LotteDTO_p { //선수
+	private String name; //선수 이름
+	private int no; //등번호
+	private String position; //포지션
+	
+	public LotteDTO_p() {};
+	public LotteDTO_p(String name, int no, String position) {
+		this.name = name;
+		this.no = no;
+		this.position = position;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+}

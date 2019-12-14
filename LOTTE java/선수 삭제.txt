@@ -1,0 +1,125 @@
+package lotte;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+
+public class Delete_player extends JFrame {
+	LotteDAO dao = new LotteDAO();
+	private JPanel contentPane;
+	private JTextField textField;
+	private JLabel lblNewLabel;
+	private JButton btnNewButton;
+	private JRadioButton rdbtnNewRadioButton;
+	private JRadioButton rdbtnNewRadioButton_1;
+	ButtonGroup bg = new ButtonGroup();
+	private JLabel lblNewLabel_1;
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Delete_player frame = new Delete_player();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Delete_player() {
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		initGUI();
+	}
+	private void initGUI() {
+		setTitle("\uC120\uC218 \uC0AD\uC81C");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 294, 164);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		rdbtnNewRadioButton = new JRadioButton("\uD22C\uC218");
+		rdbtnNewRadioButton.setBounds(12, 71, 57, 23);
+		contentPane.add(rdbtnNewRadioButton);
+		bg.add(rdbtnNewRadioButton);
+		
+		rdbtnNewRadioButton_1 = new JRadioButton("\uD0C0\uC790");
+		rdbtnNewRadioButton_1.setBounds(73, 71, 62, 23);
+		contentPane.add(rdbtnNewRadioButton_1);
+		bg.add(rdbtnNewRadioButton_1);
+		
+		textField = new JTextField();
+		textField.setBounds(73, 97, 81, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		lblNewLabel = new JLabel("\uB4F1\uBC88\uD638 : ");
+		lblNewLabel.setBounds(12, 100, 57, 15);
+		contentPane.add(lblNewLabel);
+		
+		btnNewButton = new JButton("\uC0AD    \uC81C");
+		btnNewButton.addActionListener(new ActionListener() { //삭제 버튼 누를시
+			public void actionPerformed(ActionEvent e) {
+				String num = textField.getText();
+				if(num.equals("")) {
+					JOptionPane.showMessageDialog(getContentPane(), "번호를 입력하세요!!");
+					return;
+				}
+				int no = Integer.parseInt(textField.getText());
+				int res = 0;
+				if(rdbtnNewRadioButton.isSelected()) {
+					res = dao.deletePitcher(no);
+					if(res > 0) 
+						JOptionPane.showMessageDialog(getContentPane(), "삭제 성공!!");
+					else
+						JOptionPane.showMessageDialog(getContentPane(), "없는 등번호 입니다.");
+				}
+				else if(rdbtnNewRadioButton_1.isSelected()){
+					res = dao.deleteBatter(no);
+					if(res > 0) 
+						JOptionPane.showMessageDialog(getContentPane(), "삭제 성공!!");
+					else
+						JOptionPane.showMessageDialog(getContentPane(), "없는 등번호 입니다.");
+				}
+				else {
+					JOptionPane.showMessageDialog(getContentPane(), "버튼을 눌려주세요!!");
+				}
+			}
+		});
+		btnNewButton.setBounds(166, 96, 97, 23);
+		contentPane.add(btnNewButton);
+		
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\logo_header.png"));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(12, 10, 251, 55);
+		contentPane.add(lblNewLabel_1);
+	}
+}

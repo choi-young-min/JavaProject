@@ -1,0 +1,268 @@
+package lotte;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
+
+//JAVA -> DB로
+public class LotteDAO {
+	Connection con = null;
+	PreparedStatement ps = null;
+	PreparedStatement ps2 = null;
+	ResultSet rs = null;
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	
+	public void dbConnect() throws Exception { //db 연결
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		con = DriverManager.getConnection(url,"SCOTT","TIGER");
+		System.out.println("Db Conneted...");
+	}
+	
+	public int insertBatter(LotteDTO_BAT lb) { //선수 추가(타자)
+		String sql = "INSERT INTO PLAYER VALUES(?,?,?)";
+		String sql2 = "INSERT INTO BATTER VALUES(?,?,?,?,?,?)";
+		int result = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, lb.getName());
+			ps.setInt(2, lb.getNo());
+			ps.setString(3, lb.getPosition());
+			result = ps.executeUpdate();
+			if(result > 0) {
+				ps = con.prepareStatement(sql2);
+				ps.setInt(1, lb.getNo());
+				ps.setInt(2, lb.getBox());
+				ps.setDouble(3, lb.getBat());
+				ps.setInt(4, lb.getHit());
+				ps.setInt(5, lb.getHome());
+				ps.setInt(6, lb.getRun());
+				result = ps.executeUpdate();
+			}
+		} catch (SQLException e) {}
+		return result;
+	}
+	
+	public int insertPitcher(LotteDTO_PIT lp) { //선수 추가(투수)
+		String sql = "INSERT INTO PLAYER VALUES(?,?,?)";
+		String sql2 = "INSERT INTO PITCHER VALUES(?,?,?,?)";
+		int result = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, lp.getName());
+			ps.setInt(2, lp.getNo());
+			ps.setString(3, lp.getPosition());
+			result = ps.executeUpdate();
+			if(result > 0) {
+				ps = con.prepareStatement(sql2);
+				ps.setInt(1, lp.getNo());
+				ps.setDouble(2, lp.getEra());
+				ps.setInt(3, lp.getK());
+				ps.setInt(4, lp.getB());
+				result = ps.executeUpdate();
+			}
+		} catch (SQLException e) {}
+		return result;
+	}
+	
+	public int deleteBatter(int no) { //선수 삭제(타자)
+		String sql = "DELETE FROM BATTER WHERE NO = ?";
+		String sql2 = "DELETE FROM PLAYER WHERE NO = ?";
+		int res = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			int result = ps.executeUpdate();
+			if(result > 0) {
+				ps = con.prepareStatement(sql2);
+				ps.setInt(1, no);
+				res = ps.executeUpdate();
+			}
+		} catch (SQLException e) {}
+		return res;
+	}
+	
+	public int deletePitcher(int no) { //선수 삭제(투수)
+		String sql = "DELETE FROM PITCHER WHERE NO = ?";
+		String sql2 = "DELETE FROM PLAYER WHERE NO = ?";
+		int res = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, no);
+			int result = ps.executeUpdate();
+			if(result > 0) {
+				ps = con.prepareStatement(sql2);
+				ps.setInt(1, no);
+				res = ps.executeUpdate();
+			}
+		} catch (SQLException e) {}
+		return res;
+	} 
+	
+	public boolean comfirmLogin(String id,String password) { //로그인 아이디 패스워드 확인 검사!
+		String sql = "SELECT ID,PASSWORD FROM GM WHERE ID = ? AND PASSWORD = ?";
+		boolean exist = false;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, password);
+			rs = ps.executeQuery();
+			exist = rs.next();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return exist;
+	}
+	
+	public boolean selectID(String id) {  //아이디 중복 검사
+		String sql = "SELECT id FROM GM WHERE ID = ?";
+		System.out.println(id);
+		boolean isExist = true;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			isExist = rs.next();
+		} catch (SQLException e) {}
+		return isExist;
+	}
+
+	public int insertPerson(LotteDTO_PERSON lp) { //사용자 회원가입
+		String sql = "INSERT INTO GM VALUES(?,?,?,?)";
+		int result = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, lp.getId());
+			ps.setString(2, lp.getPassword());
+			ps.setString(3, lp.getName());
+			ps.setString(4, lp.getAddr());
+			result = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	
+	public LotteDTO_PIT[] getInfo2() { //투수 기록 출력
+		String sql = "SELECT NAME,P.NO,POSITION,ERA,K,B FROM PLAYER P,PITCHER PI WHERE P.NO = PI.NO";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			LotteDTO_PIT[] list = makeArray2(rs);
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public LotteDTO_BAT[] getInfo(){ //타자 기록 출력!
+		String sql = "SELECT NAME,P.NO,POSITION,BOX,BAT,HIT,HOME,RUN FROM PLAYER P,BATTER B WHERE P.NO = B.NO";
+		try {
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			LotteDTO_BAT[] list = makeArray(rs);
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+	
+	public LotteDTO_PIT[] makeArray2(ResultSet rs) { //makeArray투수
+		Vector<LotteDTO_PIT> list = new Vector<LotteDTO_PIT>();
+		LotteDTO_PIT lp= null;
+		try {
+			while(rs.next()) {
+				lp = new LotteDTO_PIT();
+				lp.setName(rs.getString(1));
+				lp.setNo(rs.getInt(2));
+				lp.setPosition(rs.getString(3));
+				lp.setEra(rs.getDouble(4));
+				lp.setK(rs.getInt(5));
+				lp.setB(rs.getInt(6));
+				list.add(lp);
+			}
+		} catch (SQLException e) {}
+		LotteDTO_PIT[] memArr = new LotteDTO_PIT[list.size()];
+		list.copyInto(memArr); // memArr에 list의 값을 카피해라
+		return memArr;
+	}
+	
+	public LotteDTO_BAT[] makeArray(ResultSet rs) { //makeArray타자
+		Vector<LotteDTO_BAT> list = new Vector<LotteDTO_BAT>();
+		LotteDTO_BAT lb = null;
+		try {
+			while(rs.next()) {
+				lb = new LotteDTO_BAT();
+				lb.setName(rs.getString(1));
+				lb.setNo(rs.getInt(2));
+				lb.setPosition(rs.getString(3));
+				lb.setBox(rs.getInt(4));
+				lb.setBat(rs.getDouble(5));
+				lb.setHit(rs.getInt(6));
+				lb.setHome(rs.getInt(7));
+				lb.setRun(rs.getInt(8));
+				list.add(lb);
+			}
+		} catch (SQLException e) {}
+		LotteDTO_BAT[] memArr = new LotteDTO_BAT[list.size()];
+		list.copyInto(memArr); // memArr에 list의 값을 카피해라
+		return memArr;
+	}
+	
+	public int updatePitcher(LotteDTO_PIT lp) { //투수 수정
+		int res = 0;
+		String sql = "UPDATE PITCHER SET ERA = ?, K = ?, B = ? WHERE NO = ?";
+		System.out.println(lp.getNo());
+		System.out.println(lp.getK());
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setDouble(1, lp.getEra());
+			ps.setInt(2, lp.getK());
+			ps.setInt(3, lp.getB());
+			ps.setInt(4, lp.getNo());
+			res = ps.executeUpdate();
+			System.out.println(res);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
+	}
+	
+	public int updateBatter(LotteDTO_BAT lb) { //타자 수정
+		int res = 0;
+		String sql = "UPDATE BATTER SET BOX = ?,BAT = ?, HIT = ?, HOME = ?, RUN = ? WHERE NO = ?";
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, lb.getBox());
+			ps.setDouble(2, lb.getBat());
+			ps.setInt(3, lb.getHit());
+			ps.setInt(4, lb.getHome());
+			ps.setInt(5, lb.getRun());
+			ps.setInt(6, lb.getNo());
+			res = ps.executeUpdate();
+		}catch(SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return res;
+	}
+	
+	public int deleteUser(String id, String pass) { //유저 삭제
+		String sql = "DELETE FROM GM WHERE ID = ? AND PASSWORD = ?";
+		int res = 0;
+		try {
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, pass);
+			res = ps.executeUpdate();
+		} catch (SQLException e) {}
+		return res;
+	}
+}
+
+

@@ -1,0 +1,167 @@
+package lotte;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Toolkit;
+
+public class LotteGUI extends JFrame {
+	
+	LotteDAO dao=new LotteDAO();  
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	Connection con = null;
+	private JPanel contentPane;
+	private JLabel lblId;
+	private JLabel lblPassword;
+	private JTextField textField;
+	private JLabel label;
+	private JButton btn_Login;
+	private JButton btn_NewPerson;
+	private JPasswordField passwordField;
+	private JLabel lblNewLabel;
+	private JButton btnNewButton;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LotteGUI frame = new LotteGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public LotteGUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\user\\eclipse-workspace\\Lotte\\Glogo.png"));
+		initGUI();
+		try {
+			dao.dbConnect();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void initGUI() {
+		setResizable(false);
+		setTitle("\uB86F\uB370\uC790\uC774\uC5B8\uCE20 \uAD00\uB9AC");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 476, 526);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		lblId = new JLabel("ID");
+		lblId.setForeground(Color.WHITE);
+		lblId.setBounds(129, 296, 57, 15);
+		contentPane.add(lblId);
+		
+		lblPassword = new JLabel("PASSWORD");
+		lblPassword.setForeground(Color.WHITE);
+		lblPassword.setBounds(129, 336, 76, 15);
+		contentPane.add(lblPassword);
+		
+		textField = new JTextField();
+		textField.setForeground(Color.BLACK);
+		textField.setBounds(232, 293, 116, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		label = new JLabel("\uB86F\uB370\uC790\uC774\uC5B8\uCE20");
+		label.setForeground(Color.WHITE);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("굴림", Font.BOLD | Font.ITALIC, 28));
+		label.setBounds(80, 225, 320, 47);
+		contentPane.add(label);
+		
+		btn_Login = new JButton("\uB85C\uADF8\uC778");
+		btn_Login.setForeground(Color.BLACK);
+		btn_Login.addActionListener(new ActionListener() { //로그인 버튼 리스너
+			public void actionPerformed(ActionEvent arg0) {
+				New_Member nm = new New_Member();
+				String id = textField.getText();
+				String pass = new String(passwordField.getPassword());
+				boolean login = dao.comfirmLogin(id, pass);
+				if(id.equals("admin") && pass.equals("admin")) {
+					nm.setTitle("롯데자이언츠 관리(관리자 모드)");
+					nm.mnNewMenu_2.setEnabled(true);
+					login = true;
+				}
+				if(login == true) {
+					dispose();
+					nm.setVisible(true);
+				}
+				else if(login == false) {
+					JOptionPane.showMessageDialog(getContentPane(), "로그인 실패!!아이디,비밀번호를 확인하세요~");
+					return;
+				}
+			}
+		});
+		btn_Login.setBounds(303, 395, 97, 23);
+		contentPane.add(btn_Login);
+		
+		btn_NewPerson = new JButton("\uD68C\uC6D0\uAC00\uC785");
+		btn_NewPerson.setForeground(Color.BLACK);
+		btn_NewPerson.addActionListener(new ActionListener() {//회원가입 버튼 리스너
+			public void actionPerformed(ActionEvent e) {
+				NewPerson p = new NewPerson();
+				p.setVisible(true);
+			}
+		});
+		btn_NewPerson.setBounds(194, 395, 97, 23);
+		contentPane.add(btn_NewPerson);
+		
+		passwordField = new JPasswordField();
+		passwordField.setForeground(Color.BLACK);
+		passwordField.setBounds(232, 333, 116, 21);
+		contentPane.add(passwordField);
+		
+		btnNewButton = new JButton("\uD0C8\uD1F4");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Delete_user du = new Delete_user();
+				du.setVisible(true);
+			}
+		});
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setBounds(89, 395, 97, 23);
+		contentPane.add(btnNewButton);
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\user\\eclipse-workspace\\Lotte\\bg_login.jpg"));
+		lblNewLabel.setBounds(0, 0, 472, 500);
+		contentPane.add(lblNewLabel);
+	}
+}

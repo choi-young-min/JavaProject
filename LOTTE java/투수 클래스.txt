@@ -1,0 +1,36 @@
+package lotte;
+
+public class LotteDTO_PIT extends LotteDTO_p{ //투수
+	private double era; //방어율
+	private int k; //삼진
+	private int b; //사사구
+	
+	public LotteDTO_PIT() {}
+	public LotteDTO_PIT(String name,int no,String position,double era,int k, int b)
+	{
+		super(name,no,position);
+		this.era = era;
+		this.k = k;
+		this.b = b;
+	}
+	public double getEra() {
+		return era;
+	}
+	public void setEra(double era) {
+		this.era = era;
+	}
+	public int getK() {
+		return k;
+	}
+	public void setK(int k) {
+		this.k = k;
+	}
+	public int getB() {
+		return b;
+	}
+	public void setB(int b) {
+		this.b = b;
+	}
+	
+	
+}
